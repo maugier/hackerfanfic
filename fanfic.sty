@@ -7,7 +7,8 @@
 \RequirePackage{parskip}
 \RequirePackage{lettrine}
 \RequirePackage{xparse}
-\RequirePackage{csquotes}
+\RequirePackage[french=guillemets]{csquotes}
+\RequirePackage{libertine}
 
 
 \ProcessOptions\relax
@@ -19,12 +20,16 @@
 \pagestyle{empty}
 %\setlength{\drop}{0.1\textheight}
 \centering
-\settowidth{\unitlength}{\LARGE \MakeUppercase{\thetitle}}
+\settowidth{\unitlength}{
+	%\LARGE\scshape\thetitle
+	\Large\itshape\subtitle
+}
 \vspace*{\baselineskip}
 {\large\scshape \theauthor}\\[\baselineskip]
 \rule{\unitlength}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
 \rule{\unitlength}{0.4pt}\\[\baselineskip]
-{\LARGE \MakeUppercase{\thetitle}}\\[\baselineskip]
+%{\LARGE \MakeUppercase{\thetitle}}\\[\baselineskip]
+{\LARGE \scshape \thetitle}\\[\baselineskip]
 {\Large \itshape \subtitle}\\[0.2\baselineskip]
 \rule{\unitlength}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
 \rule{\unitlength}{1.6pt}\\[\baselineskip]
@@ -58,5 +63,21 @@
 	\end{minipage}\end{#2}
 	\par\aftergroup\@afterindentfalse\aftergroup\@afterheading
 }
+
+
+%\renewcommand*{\cftchaptername}{Chapitre\space}
+
+%\markboth{---}{---}
+
+\makepagestyle{fanfic}
+\copypagestyle{fanfic}{plain}
+\makeevenfoot{fanfic}{}{-- \thepage{} --}{}
+\makeoddfoot{fanfic}{}{-- \thepage{} --}{}
+
+\pagestyle{fanfic}
+\chapterstyle{bianchi}
+\aliaspagestyle{chapter}{fanfic}
+
+		
 
 \endinput
