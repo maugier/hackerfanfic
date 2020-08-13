@@ -1,0 +1,62 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{fanfic}[2020/08/13 Discord Fanfics]
+
+\RequirePackage{ifthen}
+\RequirePackage{graphicx}
+\RequirePackage{titling}
+\RequirePackage{parskip}
+\RequirePackage{lettrine}
+\RequirePackage{xparse}
+\RequirePackage{csquotes}
+
+
+\ProcessOptions\relax
+
+%  Shamelessly stolen from 
+%  https://ctan.org/tex-archive/info/latex-samples/TitlePages
+
+\renewcommand*{\maketitle}{\begingroup
+\pagestyle{empty}
+%\setlength{\drop}{0.1\textheight}
+\centering
+\settowidth{\unitlength}{\LARGE \MakeUppercase{\thetitle}}
+\vspace*{\baselineskip}
+{\large\scshape \theauthor}\\[\baselineskip]
+\rule{\unitlength}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt}
+\rule{\unitlength}{0.4pt}\\[\baselineskip]
+{\LARGE \MakeUppercase{\thetitle}}\\[\baselineskip]
+{\Large \itshape \subtitle}\\[0.2\baselineskip]
+\rule{\unitlength}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+\rule{\unitlength}{1.6pt}\\[\baselineskip]
+\vfill
+\includegraphics[width=0.6\linewidth]{cover.jpg}
+\vfill
+{\large\scshape \thepublisher}\\[\baselineskip]
+{\small\scshape \thedate}\par
+%\vspace*{\drop}
+\cleardoublepage
+\setcounter{page}{1}
+\endgroup}
+
+\renewcommand*{\cftchapterdotsep}{\cftdotsep}
+
+\setlength{\parskip}{0.5\baselineskip}
+
+% Shamelessly stolen from 
+% https://github.com/hbristow/quthesis/blob/master/quthesis.sty#L372
+
+\newlength{\theparindent}
+\DeclareDocumentEnvironment{quote}{ O{} O{center} }
+{
+	\let\doindent\indent
+	\setlength{\theparindent}{\parindent}
+	\def\indent{\begingroup\setlength{\parindent}{\theparindent}\doindent\endgroup}
+	\begin{#2}
+	\begin{minipage}{0.8\textwidth} \itshape
+}{
+	\ifthenelse{\equal{#1}{}}{}{\par\raggedleft\textsc{-- #1}}
+	\end{minipage}\end{#2}
+	\par\aftergroup\@afterindentfalse\aftergroup\@afterheading
+}
+
+\endinput
