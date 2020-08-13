@@ -4,12 +4,21 @@
 \RequirePackage{ifthen}
 \RequirePackage{graphicx}
 \RequirePackage{titling}
-\RequirePackage{parskip}
+%\RequirePackage[]{parskip}
 \RequirePackage{lettrine}
 \RequirePackage{xparse}
 \RequirePackage[french=guillemets]{csquotes}
-\RequirePackage{libertine}
 
+
+% Colorful boxes
+\RequirePackage{tcolorbox}
+
+% Fonts
+\RequirePackage{libertine}
+%\RequirePackage{beramono}
+\setmonofont[Scale=0.8]{Cousine}
+%\RequirePackage{inconsolata}
+%\RequirePackage{bold-extra}
 
 \ProcessOptions\relax
 
@@ -65,9 +74,24 @@
 }
 
 
+% Chapter titles in ToC
 %\renewcommand*{\cftchaptername}{Chapitre\space}
 
-%\markboth{---}{---}
+% Chatlog environment
+
+\newenvironment{chatlog}{%
+	\begin{tcolorbox}[colback=black!5]
+	\begin{list}{}{
+		\setlength{\parskip}{0pt}
+		\renewcommand{\makelabel}[1]{##1\hfill}%
+		\newcommand{\say}[1][?]{\color{black}\item[<\textbf{##1}>]}
+		\newcommand{\think}[1][?]{\color{gray}\item[(\textbf{##1})]}
+		\settowidth{\labelwidth}{xaaaaaaaaaxx}%
+		\setlength{\leftmargin}{\labelwidth}%
+		\ttfamily
+		%\setlength{\leftmargin}{\labelwidth+\labelsep}%
+	}}{\end{list}\end{tcolorbox}}
+
 
 \makepagestyle{fanfic}
 \copypagestyle{fanfic}{plain}
@@ -78,6 +102,5 @@
 \chapterstyle{bianchi}
 \aliaspagestyle{chapter}{fanfic}
 
-		
 
 \endinput
