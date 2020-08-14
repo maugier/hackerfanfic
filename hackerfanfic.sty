@@ -29,9 +29,9 @@
 \pagestyle{empty}
 %\setlength{\drop}{0.1\textheight}
 \centering
-\settowidth{\unitlength}{
-	%\LARGE\scshape\thetitle
-	\Large\itshape\subtitle
+\settowidth{\unitlength}{%
+	\LARGE\scshape\thetitle%
+	%\Large\itshape\subtitle%
 }
 \vspace*{\baselineskip}
 {\large\scshape \theauthor}\\[\baselineskip]
@@ -60,7 +60,7 @@
 % https://github.com/hbristow/quthesis/blob/master/quthesis.sty#L372
 
 \newlength{\theparindent}
-\DeclareDocumentEnvironment{quote}{ O{} O{center} }
+\DeclareDocumentEnvironment{quote}{ O{} O{flushright} }
 {
 	\let\doindent\indent
 	\setlength{\theparindent}{\parindent}
@@ -75,7 +75,8 @@
 
 
 % Chapter titles in ToC
-%\renewcommand*{\cftchaptername}{Chapitre\space}
+\renewcommand*{\cftchaptername}{\chaptername\space}
+\renewcommand*{\cftchapteraftersnum}{:}
 
 % Chatlog environment
 
@@ -102,5 +103,6 @@
 \chapterstyle{bianchi}
 \aliaspagestyle{chapter}{fanfic}
 
+\setcounter{chapter}{-1}
 
 \endinput
